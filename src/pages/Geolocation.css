@@ -1,0 +1,23 @@
+*{
+    font-family: poppins;
+}
+
+#title{
+    margin-right: 50px;
+}
+
+.GeoCard{
+    margin-top: 100px;
+}
+
+.CardTitle{
+    text-align: center;
+    font-weight: bold;
+    
+}
+.CardContent{
+    padding-top: 10px;
+}
+.CardContent:last-child{
+    padding-bottom: 20px;
+}
