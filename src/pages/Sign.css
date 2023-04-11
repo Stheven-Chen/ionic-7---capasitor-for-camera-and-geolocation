@@ -1,0 +1,20 @@
+.signTitle{
+    text-align: center;
+}
+
+#signature-pad{
+    height: 40%;
+    width: 100%;
+}
+
+div.signBtn{
+    display: flex;
+    justify-content: center;
+}
+img{
+    width: 100%;
+}
+
+.signedTitle{
+    text-align: center;
+}

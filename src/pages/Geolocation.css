@@ -21,3 +21,9 @@
 .CardContent:last-child{
     padding-bottom: 20px;
 }
+
+.geoBtn{
+    display: flex;
+    justify-content: center;
+    padding-bottom: 20px;
+}

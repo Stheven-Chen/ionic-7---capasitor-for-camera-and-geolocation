@@ -38,6 +38,16 @@ const Geolokasi: React.FC = () => {
     window.open(`https://www.google.com/maps/search/?api=1&query=${latitude},${longitude}`);
   };
 
+  const getGeo = async () => {
+    try {
+      const position = await Geolocation.getCurrentPosition();
+      setLatitude(position.coords.latitude);
+      setLongitude(position.coords.longitude);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <IonPage>
       <IonHeader>
@@ -57,17 +67,22 @@ const Geolokasi: React.FC = () => {
               <IonCard>
                 <IonCardHeader>
                   <IonCardTitle className="CardTitle">
-                    <h1>This Is Geolokasi</h1>
+                    <h1>This Is Geolocation</h1>
                   </IonCardTitle>
                 </IonCardHeader>
                 <IonCardContent className="CardContent">
                   <h2>Latitude: {latitude}</h2>
                   <h2>Longitude: {longitude}</h2>
                 </IonCardContent>
-
-                <IonButton expand="block" color="secondary" onClick={openMap}>
+                <div className="geoBtn">
+                <IonButton  color="secondary" onClick={getGeo}>
+                  Get Geolocation 
+                </IonButton>
+                <IonButton color="secondary" onClick={openMap}>
                   Open Map
                 </IonButton>
+                </div>
+
               </IonCard>
             </IonCol>
           </IonRow>
@@ -78,3 +93,4 @@ const Geolokasi: React.FC = () => {
 };
 
 export default Geolokasi;
+

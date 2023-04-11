@@ -5,6 +5,7 @@ import Menu from './components/Menu';
 import Home from './pages/Home';
 import Geolocation from './pages/Geolocation';
 import Camera from './pages/Camera';
+import Sign from './pages/Sign';
 
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css';
@@ -40,6 +41,7 @@ const App: React.FC = () => {
             <Route path='/page/Home' component={Home}/>
             <Route path='/page/Geolocation' component={Geolocation}/>
             <Route path='/page/Camera' component={Camera}/>
+            <Route path='/page/Sign' component={Sign}/>
           </IonRouterOutlet>
         </IonSplitPane>
       </IonReactRouter>

@@ -40,6 +40,12 @@ const appPages: AppPage[] = [
     iosIcon: '',
     mdIcon: ''
   },
+  {
+    title: 'Sign',
+    url: '/page/Sign',
+    iosIcon: '',
+    mdIcon: ''
+  },
   // {
   //   title: 'Outbox',
   //   url: '/page/Outbox',

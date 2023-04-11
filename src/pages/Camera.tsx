@@ -12,7 +12,11 @@ import {
   IonTitle,
   IonMenuButton,
   IonRow,
-  IonCol
+  IonCol,
+  IonCard,
+  IonCardHeader,
+  IonCardContent,
+  IonCardTitle,
 } from "@ionic/react";
 
 const Kamera: React.FC = () => {
@@ -26,6 +30,10 @@ const Kamera: React.FC = () => {
     });
     setPhoto(image.dataUrl);
   };
+
+  const resetPhoto = async () =>{
+    setPhoto(undefined);
+  }
 
   return (
     <IonPage>
@@ -43,16 +51,25 @@ const Kamera: React.FC = () => {
         <IonGrid>
           <IonRow>
             <IonCol size="12">
-              <h1 className="h1test">This Is Camera</h1>
-            </IonCol>
-          </IonRow>
-          <IonRow>
-            <IonCol size="12" class="ion-text-center">
-              {photo ? (
-                <img src={photo} />
+              <IonCard className="imgCard">
+                <IonHeader>
+                  <IonCardTitle>
+
+                    <h1 className="cameraTitle">This Is Camera</h1>
+                  </IonCardTitle>
+                </IonHeader>
+                <IonCardContent>
+                {photo ? (
+                <>
+                  <img src={photo} />
+                  <IonButton onClick={resetPhoto}>Take Again</IonButton>
+                </>
               ) : (
-                <IonButton onClick={handleCameraClick}>Take a photo</IonButton>
+                <IonButton expand="block" onClick={handleCameraClick}>Take a photo</IonButton>
               )}
+
+                </IonCardContent>
+              </IonCard>
             </IonCol>
           </IonRow>
         </IonGrid>
