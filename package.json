@@ -12,6 +12,9 @@
     "lint": "eslint"
   },
   "dependencies": {
+    "@capacitor-community/barcode-scanner": "^3.0.3",
+    "@capacitor-community/http": "^1.4.1",
+    "@capacitor-community/text-to-speech": "^2.1.0",
     "@capacitor/android": "4.7.3",
     "@capacitor/app": "4.1.1",
     "@capacitor/camera": "^4.1.4",
@@ -20,16 +23,19 @@
     "@capacitor/haptics": "4.1.0",
     "@capacitor/keyboard": "4.1.1",
     "@capacitor/status-bar": "4.1.1",
+    "@ionic-native/qr-scanner": "^5.36.0",
     "@ionic/react": "^7.0.0",
     "@ionic/react-router": "^7.0.0",
     "@types/react-router": "^5.1.20",
     "@types/react-router-dom": "^5.3.3",
     "ionicons": "^7.0.0",
+    "qrcode-generator": "^1.4.4",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router": "^5.3.4",
     "react-router-dom": "^5.3.4",
-    "signature_pad": "^4.1.5"
+    "signature_pad": "^4.1.5",
+    "tesseract.js": "^4.0.3"
   },
   "devDependencies": {
     "@capacitor/cli": "4.7.3",

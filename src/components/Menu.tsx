@@ -46,6 +46,18 @@ const appPages: AppPage[] = [
     iosIcon: '',
     mdIcon: ''
   },
+  {
+    title: 'Qr',
+    url: '/page/Qr',
+    iosIcon: '',
+    mdIcon: ''
+  },
+  {
+    title: 'OCR',
+    url: '/page/OCR',
+    iosIcon: '',
+    mdIcon: ''
+  },
   // {
   //   title: 'Outbox',
   //   url: '/page/Outbox',

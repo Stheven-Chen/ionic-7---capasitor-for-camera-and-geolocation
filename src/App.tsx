@@ -6,6 +6,8 @@ import Home from './pages/Home';
 import Geolocation from './pages/Geolocation';
 import Camera from './pages/Camera';
 import Sign from './pages/Sign';
+import Qr from './pages/Qr';
+import OCR from './pages/OCR';
 
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css';
@@ -42,6 +44,8 @@ const App: React.FC = () => {
             <Route path='/page/Geolocation' component={Geolocation}/>
             <Route path='/page/Camera' component={Camera}/>
             <Route path='/page/Sign' component={Sign}/>
+            <Route path='/page/Qr' component={Qr}/>
+            <Route path='/page/OCR' component={OCR}/>
           </IonRouterOutlet>
         </IonSplitPane>
       </IonReactRouter>
