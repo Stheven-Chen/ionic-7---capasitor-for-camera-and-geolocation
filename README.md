@@ -15,6 +15,17 @@ To run this project locally, follow these steps:
 
 This project is a template that can be used as a starting point for an Ionic app that requires camera and geolocation features. The app uses Capacitor plugins to access these features on both Android and iOS devices.
 
+## Apk
+To generate an APK file, you can follow these steps:
+
+1. Run the command `npm run build` to build the Ionic app.
+2. Run the command `npx cap copy` to copy the built app to the native project.
+3. Run the command `npx cap sync` to sync the native project with the web app.
+4. Run the command `npx cap open android` to open the native project in Android Studio.
+5. In Android Studio, go to "Build" -> "Build APK" to build the APK file.
+
+Make sure that you have the necessary Android SDK installed and configured before building the APK.
+
 ## Package.json
 
 The `package.json` file lists all the dependencies and devDependencies used in this project. Some notable dependencies used are:
