@@ -82,7 +82,7 @@ const Qr: React.FC = () => {
       <IonContent>
         <IonRow>
           <IonCol>
-            <IonInput
+            <IonInput className='input'
               value={link}
               placeholder="Input link here"
               onIonChange={(e) => setLink((e.detail.value) ? e.detail.value.toString():"Input Link Here" )}
@@ -91,7 +91,7 @@ const Qr: React.FC = () => {
         </IonRow>
         <IonRow>
           <IonCol size='6'>
-            <IonButton  expand='block' onClick={generateQRCode}>
+            <IonButton shape='round' expand='block' onClick={generateQRCode}>
               Generate QR Code
             </IonButton>
           </IonCol>
@@ -100,6 +100,7 @@ const Qr: React.FC = () => {
               expand='block'
               onClick={startScan}
               disabled={isScanning}
+              shape='round'
             >
               {isScanning ? 'Scanning...' : 'Scan QR Code'}
             </IonButton>

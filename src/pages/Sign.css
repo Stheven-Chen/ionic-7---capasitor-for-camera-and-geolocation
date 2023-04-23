@@ -10,6 +10,8 @@
 div.signBtn{
     display: flex;
     justify-content: center;
+    gap: 20px;
+    padding-bottom: 10px;
 }
 img{
     width: 100%;
@@ -18,3 +20,4 @@ img{
 .signedTitle{
     text-align: center;
 }
+

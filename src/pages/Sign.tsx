@@ -73,8 +73,8 @@ const Sign: React.FC = () => {
                                     <canvas id="signature-pad" ref={canvasRef}></canvas>
                                 </IonCardContent>
                                 <div className="signBtn">
-                                    <IonButton color="secondary" onClick={handleClear}>Clear</IonButton>
-                                    <IonButton color="secondary" onClick={handleSave}>Save</IonButton>
+                                    <IonButton shape='round' color="warning" onClick={handleClear}>Clear</IonButton>
+                                    <IonButton shape='round' onClick={handleSave}>Save</IonButton>
                                 </div>
                             </IonCard>
                         </IonCol>

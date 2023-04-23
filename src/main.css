@@ -1,0 +1,18 @@
+ion-toolbar {
+    --background: #0177b9;
+    --font-family: poppins;
+}
+
+ion-content{
+    --background: #d9d9d9;
+    --font-family: poppins;
+}
+
+ion-button{
+    --background: #006699 ;
+}
+
+ion-card{
+    --background: #333333;
+    --color: #A3E4D7;
+}

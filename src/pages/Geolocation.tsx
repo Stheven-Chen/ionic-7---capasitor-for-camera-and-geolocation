@@ -75,10 +75,10 @@ const Geolokasi: React.FC = () => {
                   <h2>Longitude: {longitude}</h2>
                 </IonCardContent>
                 <div className="geoBtn">
-                <IonButton  color="secondary" onClick={getGeo}>
+                <IonButton shape="round" color="secondary" onClick={getGeo}>
                   Get Geolocation 
                 </IonButton>
-                <IonButton color="secondary" onClick={openMap}>
+                <IonButton shape="round" color="secondary" onClick={openMap}>
                   Open Map
                 </IonButton>
                 </div>
