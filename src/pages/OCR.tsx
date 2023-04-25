@@ -92,7 +92,7 @@ const Home: React.FC = () => {
   const takePhoto = async () => {
     const image = await Camera.getPhoto({
       quality: 100,
-      allowEditing: false,
+      allowEditing: true,
       resultType: CameraResultType.Base64
     });
     setPhoto(image.base64String)
@@ -101,6 +101,7 @@ const Home: React.FC = () => {
   const clear = async () => {
     setText(undefined);
     setPhoto(undefined);
+    setFull(undefined);
   }
 
   return (
