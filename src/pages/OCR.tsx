@@ -1,20 +1,42 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './OCR.css';
 import * as component from '@ionic/react';
 import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
 import Tesseract from 'tesseract.js';
 import {} from 'react-image';
 import cv from "@techstark/opencv-js"
+import { Storage } from '@ionic/storage';
+import { useHistory } from 'react-router-dom';
 
 const Home: React.FC = () => {  
+  const store = new Storage();
+  store.create();
+
+  
+
 
   const [text, setText] = useState<string>();
   const [full, setFull] = useState<string>(); // For Test 
   const [photo, setPhoto] = useState<any>();
+  const [NIK, setNIK] = useState<any>();
+  const [NAME, setNAME] = useState<any>();
+  const [tempatLahir, setTempatLahir] = useState<any>();
+  const [pekerjaan, setPekerjaan] = useState<any>();
   const [isLoading, setLoading] = useState<boolean>(false);
+  const [isAlertVisible, setIsAlertVisible] = useState<boolean>(false);
+  const history = useHistory();
+
+
   let inverted;
   let NIKREGEX = /NIK\s?:?.?(\d{16})/;
   let NAMAREGEX = /Nama\s?:?.?\s?([a-zA-Z\s]+)\n/i;
+  let tempatLahirREGEX = /Tempat\/Tgl Lahir\s?:?.?\s?([a-zA-Z\s]+)\n/i;
+  let pekerjaanREGEX = /Pekerjaan\s?:?.?\s?([a-zA-Z\s]+)\n/i;
+
+  // storage.set('NIK', NIK);
+  // storage.set('NAME', NAME);
+  // storage.set('tempatLahir', tempatLahir);
+  // storage.set('pekerjaan', pekerjaan);
 
   
   const handleClick = async () => {
@@ -66,12 +88,20 @@ const Home: React.FC = () => {
         );
           let nikMatch = result.data.text.match(NIKREGEX);
           let namaMatch = result.data.text.match(NAMAREGEX);
+          let lahirMatch = result.data.text.match(tempatLahirREGEX);
+          let pekerjaanMatch = result.data.text.match(pekerjaanREGEX);
           const nik = nikMatch? nikMatch[1].replace(/\s+/g, '') : null;
           const nama = namaMatch? namaMatch[1].replace(/\n/g, '') : null;
+          const lahir = lahirMatch? lahirMatch[1].replace(/\n/g, '') : null;
+          const job = pekerjaanMatch? pekerjaanMatch[1].replace(/\n/g, '') : null;
 
           (nik !== null)? (
             console.log('NIK:', nik, 'Nama:', nama),
-            setText(`NIK: ${nik}\nNama: ${nama}`)
+            setText(`NIK: ${nik}\nNama: ${nama}\nTempat Lahir: ${lahir}\nPekerjaan: ${job}`),
+            setNIK(nik),
+            setNAME(nama),
+            setTempatLahir(lahir),
+            setPekerjaan(job)
           ):(
             console.log('NIK Tidak Ditemukan'),
             setText('NIK Tidak Ditemukan')
@@ -87,6 +117,38 @@ const Home: React.FC = () => {
       }
     }
   };
+
+  const redirect = () => {
+    console.log('sudah di klik');
+  
+    // Validasi input
+    if (!NIK || !NAME || !tempatLahir || !pekerjaan) {
+      setIsAlertVisible(true);
+      return;
+    }
+  
+    store
+      .set('NIK', NIK)
+      .then(() => console.log(NIK))
+      .then(() => store.set('NAME', NAME))
+      .then(() => console.log(NAME))
+      .then(() => store.set('tempatLahir', tempatLahir))
+      .then(() => console.log(tempatLahir))
+      .then(() => store.set('pekerjaan', pekerjaan))
+      .then(() => console.log(pekerjaan))
+      .then(() => {
+        console.log('Data saved');
+        history.push('/page/confirmation');
+      })
+      .catch((error) => {
+        console.error('Error saving data', error);
+      });
+  };
+  
+  
+
+
+
   
 
   const takePhoto = async () => {
@@ -143,6 +205,29 @@ const Home: React.FC = () => {
             </component.IonButton>
             </component.IonCard>
         </>}
+        <component.IonCard className='inputCard'>
+          <component.IonCardTitle className='cardTitle'>
+            <h1>Input Field</h1>
+          </component.IonCardTitle>
+          <component.IonCardContent className='cardContent'>
+            <>
+            <component.IonInput className='inputField' fill='solid' label='NIK' labelPlacement='floating' clearInput={true} value={NIK} onIonInput={(event) => setNIK(event.detail.value!)}></component.IonInput>
+            <component.IonInput className='inputField' fill='solid' label='Nama' labelPlacement='floating' clearInput={true} value={NAME} onIonInput={(event) => setNAME(event.detail.value!)}></component.IonInput>
+            <component.IonInput className='inputField' fill='solid' label='Tempat Lahir' labelPlacement='floating' clearInput={true} value={tempatLahir} onIonInput={(event) => setTempatLahir(event.detail.value!)}></component.IonInput>
+            <component.IonInput className='inputField' fill='solid' label='Pekerjaan' labelPlacement='floating' clearInput={true} value={pekerjaan} onIonInput={(event) => setPekerjaan(event.detail.value!)}></component.IonInput>
+            <component.IonButton className='submitBtn' shape='round' expand='block' onClick={() => redirect()}>
+            Submit
+            </component.IonButton>
+            <component.IonAlert
+              isOpen={isAlertVisible}
+              onDidDismiss={() => setIsAlertVisible(false)}
+              header="It's look like something missing here"
+              message="Please fill in all fields."
+              buttons={['OK']}
+            ></component.IonAlert>
+            </>
+          </component.IonCardContent>
+        </component.IonCard>
       </component.IonContent>
     </component.IonPage>
   );

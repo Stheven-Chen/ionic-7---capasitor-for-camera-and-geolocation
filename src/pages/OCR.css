@@ -4,3 +4,17 @@
     padding-left: 50px;
     padding-right: 50px;
 }
+
+.cardInput{
+    border-radius: 10px;
+}
+
+.cardTitle h1{
+    text-align: center;
+    font-weight: bold;
+}
+
+.inputField input {
+    border-radius: 10px;
+  }
+  

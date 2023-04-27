@@ -8,6 +8,7 @@ import Camera from './pages/Camera';
 import Sign from './pages/Sign';
 import Qr from './pages/Qr';
 import OCR from './pages/OCR';
+import confirmation from './pages/confirmation';
 
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css';
@@ -46,6 +47,7 @@ const App: React.FC = () => {
             <Route path='/page/Sign' component={Sign}/>
             <Route path='/page/Qr' component={Qr}/>
             <Route path='/page/OCR' component={OCR}/>
+            <Route path='/page/confirmation' component={confirmation}/>
           </IonRouterOutlet>
         </IonSplitPane>
       </IonReactRouter>
