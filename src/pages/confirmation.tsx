@@ -1,6 +1,6 @@
 import "./confirmtion.css";
 import * as component from "@ionic/react";
-import { useHistory } from "react-router-dom";
+import { useHistory, useLocation } from "react-router-dom";
 import { Storage } from "@ionic/storage";
 import React, { useState, useEffect } from "react";
 
@@ -14,6 +14,14 @@ const Conf: React.FC = () => {
   const [lahirHere, setLahirhere] = useState<any>("");
   const [pekerjaanHere, setPekerjaanhere] = useState<any>("");
   const [isAlertVisible, setIsAlertVisible] = useState<boolean>(false);
+
+  // passing value using get method  
+  const location = useLocation();
+  const params = new URLSearchParams(location.search);
+  const NIK = params.get("NIK");
+  const NAME = params.get("NAME");
+  const tempatLahir = params.get("tempatLahir");
+  const pekerjaan = params.get("pekerjaan");
 
 
   
@@ -40,22 +48,29 @@ const Conf: React.FC = () => {
 
   function handleRefresh(event: CustomEvent<component.RefresherEventDetail>) {
     const timeOut = setTimeout(() => {
-      Promise.all([
-        store.get("NIK"),
-        store.get("NAME"),
-        store.get("tempatLahir"),
-        store.get("pekerjaan")
-      ]).then(([NIK, NAME, lahir, job]) => {
-        setNIKhere(NIK);
-        setNamehere(NAME);
-        setLahirhere(lahir);
-        setPekerjaanhere(job);
-        console.log(NIK, NAME, lahir, job);
-        event.detail.complete();
-      });
+    //   Promise.all([
+    //     store.get("NIK"),
+    //     store.get("NAME"),
+    //     store.get("tempatLahir"),
+    //     store.get("pekerjaan")
+    //   ]).then(([NIK, NAME, lahir, job]) => {
+    //     setNIKhere(NIK);
+    //     setNamehere(NAME);
+    //     setLahirhere(lahir);
+    //     setPekerjaanhere(job);
+    //     console.log(NIK, NAME, lahir, job);
+    //     event.detail.complete();
+    //   });
+
+    // GET
+    const NIK = params.get("NIK");
+    const NAME = params.get("NAME");
+    const tempatLahir = params.get("tempatLahir");
+    const pekerjaan = params.get("pekerjaan");
     }, 2000);
   
     return () => clearTimeout(timeOut);
+
   }
   
   
@@ -65,9 +80,13 @@ const Conf: React.FC = () => {
 
   const ok = async () => {
     setIsAlertVisible(true);
-    store.clear();
-    history.push('/page/OCR/')
   };
+
+  const alertOK = async ()=>{
+    store.clear();
+    history.push('/page/OCR/');
+    
+  }
 
   
   return (
@@ -92,23 +111,31 @@ const Conf: React.FC = () => {
               <p>Is Data Ok?</p>
             </component.IonCardTitle>
           </component.IonCardHeader>
+          {/* use useState hook of "here" to use storage method, now is using get to pass value  */}
           <component.IonCardContent>
-            NIK: {NIKhere}
+            NIK: {NIK}
             <br />
-            Nama : {nameHere}
+            Nama : {NAME}
             <br />
-            Tempat Lahir : {lahirHere}
+            Tempat Lahir : {tempatLahir}
             <br />
-            Pekerjaan : {pekerjaanHere}
+            Pekerjaan : {pekerjaan}
           </component.IonCardContent>
-          <component.IonButton expand="block" onClick={() => back()}>Back</component.IonButton>
-          <component.IonButton expand="block" onClick={() => ok()}>Ok</component.IonButton>
+          <div className="ionBtn">
+          <component.IonButton className="backBtn" color="warning" shape="round" expand="block" onClick={() => back()}>Back</component.IonButton>
+          <component.IonButton className="okBtn" shape="round" expand="block" onClick={() => ok()}>Ok</component.IonButton>
+          </div>
           <component.IonAlert
               isOpen={isAlertVisible}
               onDidDismiss={() => setIsAlertVisible(false)}
               header="OK"
               message="Your data is ok, Thankyou"
-              buttons={['OK']}
+              buttons={[{
+                text: 'OK',
+                cssClass: 'alert-button-confirm',
+                handler: () => alertOK(),
+              }]}              
+              cssClass='okAlert'
             ></component.IonAlert>
         </component.IonCard>
       </component.IonContent>
@@ -117,3 +144,5 @@ const Conf: React.FC = () => {
 };
 
 export default Conf;
+
+
