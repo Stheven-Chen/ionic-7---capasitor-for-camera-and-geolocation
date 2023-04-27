@@ -67,6 +67,7 @@ const Conf: React.FC = () => {
     const NAME = params.get("NAME");
     const tempatLahir = params.get("tempatLahir");
     const pekerjaan = params.get("pekerjaan");
+    event.detail.complete();
     }, 2000);
   
     return () => clearTimeout(timeOut);
